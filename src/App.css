@@ -2,9 +2,10 @@ body {
   display: flex;
   justify-content: center;
   text-align: center;
+  background-color:#dfd3c3;
 }
 form {
-  border: thin solid #ddd;
+  border: solid blue;
   padding: 2rem;
   margin-bottom: 2rem;
 }
@@ -17,6 +18,7 @@ form {
 
 .github-profile {
   margin: 1rem;
+
 }
 .github-profile img {
   width: 75px;
