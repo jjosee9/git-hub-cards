@@ -1,30 +1,16 @@
 import React from 'react';
-// import logo from './logo.svg'; //don't need it
 import './App.css';
-
-const axios = require('axios')
-
-const testData = [
-  {name: "Dan Abramov", avatar_url: "https://avatars0.githubusercontent.com/u/810438?v=4", company: "@facebook"},
-  {name: "Latori Miller", avatar_url: "https://avatars0.githubusercontent.com/u/16719162?v=4", company: "Road to Hire"},
-  {name: "Dylan Trimble", avatar_url: "https://avatars1.githubusercontent.com/u/42077977?v=4", company: "Road to Hire"},
-];
-
+const axios = require('axios');
 class Form extends React.Component {
   userNameInput = React.createRef();
   handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const resp = await axios.get(`https://api.github.com/users/${this.userNameInput.current.value}`);
-      this.props.onSubmit(resp.data);
-      this.userNameInput.current.value = '';
-      // console.log('submitted');
-      // console.log(this.userNameInput.current.value);
-      // console.log(resp.data);
-    } catch (error){
-      console.error(error);
-      console.log('Houston we have a problem!');
-    }
+    const resp = await axios.get(`https://api.github.com/users/${this.userNameInput.current.value}`);
+    this.props.onSubmit(resp.data);
+    this.userNameInput.current.value = '';
+    // console.log('submitted');
+    // console.log(this.userNameInput.current.value);
+    // console.log(resp.data);
   }
   render(){
     return(
@@ -38,7 +24,6 @@ class Form extends React.Component {
     );
   }
 }
-
 const CardList = (props) => (
   <div>
     {props.profiles.map(profile => <Card key={profile.id} {...profile}/>)}
@@ -49,7 +34,7 @@ class Card extends React.Component {
     const profile = this.props;
     return (
       <div className="github-profile">
-        <img src={profile.avatar_url} />
+        <img src={profile.avatar_url} alt="avatar"/>
         <div className="info">
           <div className="name">{profile.name}</div>
           <div className="company">{profile.company}</div>
@@ -81,37 +66,3 @@ class App extends React.Component {
   }
 }
 export default App;
-
-// const App = ({title}) => (      //capitalized becausec it is a component
-//    <div className="header">{title}</div>
-// )
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-
-// class ConditionalStyle extends React.Component {
-//   render(){
-//     return (
-//       <div style={{ color: Math.random() < 0.5 ? 'green' : 'red'}}
-//       >Look at me. I change colors</div>
-//     )
-//   }
-// }
